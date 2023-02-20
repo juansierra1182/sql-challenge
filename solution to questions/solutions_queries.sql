@@ -19,6 +19,14 @@ SELECT dm.dept_no, d.dept_name, dm.emp_no, e.last_name, e.first_name
 FROM dept_manager AS dm, departments AS d, employees AS e
 WHERE d.dept_no = dm.dept_no AND dm.emp_no = e.emp_no;
 
+-- Alternate method
+SELECT dm.dept_no, d.dept_name, dm.emp_no, e.last_name, e.first_name
+FROM dept_manager AS dm
+JOIN departments AS d ON
+d.dept_no = dm.dept_no
+JOIN employees AS e ON
+dm.emp_no = e.emp_no;
+
 -- Question 4, List first name, last name, and sex of each employee whose first name is Hercules 
 -- and whose last name begins with the letter B
 
@@ -33,12 +41,33 @@ SELECT d.dept_name, de.emp_no, e.last_name, e.first_name
 FROM departments AS	d, dept_emp AS de, employees AS e
 WHERE d.dept_no = de.dept_no AND de.emp_no = e.emp_no AND d.dept_name = 'Sales';
 
+-- Alternate
+
+SELECT d.dept_name, de.emp_no, e.last_name, e.first_name
+FROM departments AS	d
+JOIN dept_emp AS de ON
+d.dept_no = de.dept_no
+JOIN employees AS e ON
+de.emp_no = e.emp_no
+WHERE d.dept_name = 'Sales';
+
 -- Question 6, List each employee in the Sales and Development departments, including their employee number, 
 -- last name, first name, and department name
 
 SELECT d.dept_name, de.emp_no, e.last_name, e.first_name
 FROM departments AS	d, dept_emp AS de, employees AS e
 WHERE d.dept_no = de.dept_no AND de.emp_no = e.emp_no AND (d.dept_name = 'Sales' OR d.dept_name = 'Development');
+
+-- Alternate
+
+SELECT d.dept_name, de.emp_no, e.last_name, e.first_name
+FROM departments AS	d
+JOIN dept_emp AS de ON
+d.dept_no = de.dept_no
+JOIN employees AS e ON
+de.emp_no = e.emp_no
+WHERE d.dept_name = 'Sales'
+OR d.dept_name = 'Development';
 
 -- Question 7, List the frequency counts, in descending order, of all the employee last names 
 -- (that is, how many employees share each last name)
